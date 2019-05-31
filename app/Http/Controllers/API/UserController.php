@@ -3,19 +3,16 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function view(Request $request)
+    public function generateApiToken(Request $request, User $user)
     {
+        $user->generateApiToken();
 
-        $user = User::find(1);
-
-        // Creating a token without scopes...
-        $token = $user->createToken('Token Name')->accessToken;
-
-        return response()->json([$token], 200);
+        return response(new UserResource($user));
     }
 }

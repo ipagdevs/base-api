@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserApiToken extends Model
 {
-    public $table = 'user_api_tokens';
+    protected $table = 'user_api_tokens';
 
-    public $guarded = ['id'];
+    protected $guarded = ['id'];
 
     public function user()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\UserApiTokensResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -22,9 +23,8 @@ class UserResource extends JsonResource
             'attributes' => [
                 'name'       => $this->name,
                 'email'      => $this->email,
-                'api_id'     => $this->api_id,
-                'api_token'  => $this->api_token,
-                'created_at' => $this->created_at,
+                'api_tokens' => new UserApiTokensResource($this->apiTokens),
+                'created_at' => !is_null($this->created_at) ? $this->created_at->toDateTimeString() : null,
             ],
         ];
     }

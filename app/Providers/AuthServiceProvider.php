@@ -24,6 +24,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
         Passport::routes();
+
+        Passport::personalAccessTokensExpireIn(now()->addMinutes(env('OAUTH_TOKEN_LIFETIME', 525600)));
     }
 }

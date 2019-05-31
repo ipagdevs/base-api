@@ -14,9 +14,9 @@
 Route::group([], function () {
     Route::post('auth', 'AuthController@authenticate');
     Route::post('register', 'AuthController@register');
+    Route::post('user/{id}/generateToken', 'UserController@generateApiToken');
 });
 
 Route::group(['middleware' => ['auth:api']], function () {
-    Route::get('user', 'AuthController@getUser');
     Route::resource('products', 'ProductController');
 });

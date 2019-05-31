@@ -29,7 +29,6 @@ class AuthController extends Controller
         $input = $request->all();
 
         $input['password'] = bcrypt($input['password']);
-        $input['api_id'] = sha1(hash('sha256', $input['password'], true));
 
         $user = User::create($input);
         $user->generateApiToken();
@@ -53,12 +52,5 @@ class AuthController extends Controller
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-    }
-
-    public function getUser(Request $request)
-    {
-        $user = $request->user();
-
-        return response(new UserResource($user), 200);
     }
 }
