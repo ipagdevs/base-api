@@ -1,6 +1,7 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+use App\Models\Category;
 use App\Models\Product;
 use App\User;
 use Faker\Generator as Faker;
@@ -34,5 +35,12 @@ $factory->define(Product::class, function (Faker $faker) {
         'description' => $faker->name,
         'price'       => $faker->numberBetween(1, 100),
         'sku'         => Str::random(10),
+    ];
+});
+
+$factory->define(Category::class, function (Faker $faker) {
+    return [
+        'user_id' => 1,
+        'name'    => $faker->name,
     ];
 });

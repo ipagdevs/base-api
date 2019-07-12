@@ -15,8 +15,8 @@ class UserApiTokens extends Migration
     {
         Schema::create('user_api_tokens', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('user_id');
+            $table->foreign('user_id')->references('id')->on('pessoa');
             $table->string('api_id', 32);
             $table->string('api_token', 36);
             $table->text('salt');
