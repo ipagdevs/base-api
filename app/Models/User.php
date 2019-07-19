@@ -46,4 +46,19 @@ class User extends Authenticatable
     {
         return (new UserApiTokenService())->generate($this);
     }
+
+    public function methods()
+    {
+        return $this->belongsToMany(Method::class, 'metodopessoa', 'idPessoa', 'idMetodo')
+            ->withPivot('id',
+                'titulo', 'status', 'modo', 'afiliacao', 'chave', 'usuarioCaptura',
+                'senhaCaptura', 'banco', 'agencia', 'dvAgencia', 'conta', 'dvConta',
+                'carteira', 'convenio', 'prazo', 'instrucoes', 'taxa', 'juros', 'multa',
+                'parcelas', 'autenticacao', 'tipoparcelamento', 'capturaautomatica',
+                'avs', 'autorizacao', 'codigocedente', 'dvcodigocedente', 'inicionossonumero',
+                'urllogomarca', 'prioridade', 'tentativas', 'outrometodo', 'valorminimo',
+                'valormaximo', 'maxparcela', 'chave_vencimento'
+            )
+            ->withTimestamps();
+    }
 }

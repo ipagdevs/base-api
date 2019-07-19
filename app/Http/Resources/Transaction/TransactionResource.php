@@ -34,7 +34,7 @@ class TransactionResource extends JsonResource
                 'url_authentication' => (string) $this->urlAutenticacao,
                 'status'             => [
                     'code'    => (int) $this->statusPagamento,
-                    'message' => (string) $this->transMensagem,
+                    'message' => (string) $this->getStatusMessage(),
                 ],
                 'customer'           => new CustomerResource($this->customer()->first()),
                 'products'           => new TransactionProductsResource($this->products),

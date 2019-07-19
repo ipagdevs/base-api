@@ -36,6 +36,9 @@ class TransactionObserver
             case 1:
                 $operationType = 'created';
                 break;
+            case 2:
+                $operationType = 'waiting_payment';
+                break;
             case 3:
                 $operationType = 'voided';
                 break;

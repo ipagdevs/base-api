@@ -6,11 +6,10 @@ use Ship\Containers\Transaction\Components\Transaction;
 
 class TransactionPayloadService
 {
-    public function hydrate(array $payload = [])
+    public function hydrate(array $payload = [], $paymentType = 'creditcard')
     {
         // 1: Hydrate TransactionPayload
-        $paymentType = $payload['payment']['type'] ?? null;
-        if (in_array($paymentType, ['creditcard', 'debitcard'])) {
+        if ($paymentType == 'creditcard') {
             $paymentMethodPayload = [
                 'type'           => $paymentType,
                 'capture'        => $payload['payment']['capture'] ?? null,
@@ -32,7 +31,12 @@ class TransactionPayloadService
             $paymentMethodPayload = [
                 'type'        => $paymentType,
                 'fingerprint' => $payload['payment']['fingerprint'] ?? null,
-                'boleto'      => [],
+                'boleto'      => [
+                    'company'        => $payload['payment']['boleto']['company'] ?? null,
+                    'expiryDate'     => $payload['payment']['boleto']['expiryDate'] ?? null,
+                    'instructions'   => $payload['payment']['boleto']['instructions'] ?? [],
+                    'demonstratives' => $payload['payment']['boleto']['demonstratives'] ?? [],
+                ],
             ];
         }
 

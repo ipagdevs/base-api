@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TransactionRequest extends FormRequest
+class TransactionBoletoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -75,22 +75,13 @@ class TransactionRequest extends FormRequest
             'order.products.*.description'       => 'string|max:255',
 
             // PAYMENT
-            // 'payment.type'                       => 'required|string|in:creditcard,debitcard,boleto',
-            'payment.creditcard'                 => 'required|array',
-            'payment.creditcard.brand'           => 'required_with:payment.creditcard|string',
-            'payment.creditcard.token'           => 'string',
-            'payment.creditcard.number'          => 'required_with:payment.creditcard|creditcard',
-            'payment.creditcard.holder'          => 'required_with:payment.creditcard|string|max:40',
-            'payment.creditcard.month'           => 'required_with:payment.creditcard|digits:2',
-            'payment.creditcard.year'            => 'required_with:payment.creditcard|digits:4',
-            'payment.creditcard.cvv'             => 'required_with:payment.creditcard|digits_between:3,4',
-
-            // 'payment.boleto.company'             => 'required_if:payment.type,boleto|string',
-            // 'payment.boleto.expiryDate'          => 'required_if:payment.type,boleto|date_format:Y-m-d',
-            // 'payment.boleto.instructions'        => 'array',
-            // 'payment.boleto.instructions.*'      => 'required_with:payment.boleto.instructions|string|max:120',
-            // 'payment.boleto.demonstratives'      => 'array',
-            // 'payment.boleto.demonstratives.*'    => 'required_with:payment.boleto.demonstratives|string|max:120',
+            'payment.boleto'                     => 'required|array',
+            'payment.boleto.company'             => 'required_with:payment.boleto|string',
+            'payment.boleto.expiryDate'          => 'required_with:payment.boleto|date_format:Y-m-d',
+            'payment.boleto.instructions'        => 'array',
+            'payment.boleto.instructions.*'      => 'required_with:payment.boleto.instructions|string|max:120',
+            'payment.boleto.demonstratives'      => 'array',
+            'payment.boleto.demonstratives.*'    => 'required_with:payment.boleto.demonstratives|string|max:120',
         ];
     }
 }
